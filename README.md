@@ -1,20 +1,4 @@
-# trabalho-do-arduino-
-trabalho da estacio com lucas 
-/*******************************************************************************
-* Sensor de Som : Mantenha Silencio (v1.0)
-*
-* Programa para alertar visualmente quando um barulho excedeu o
-* limite estabelecido.
-*
-* Copyright 2020 RoboCore.
-* Escrito por Matheus Cassioli (30/07/2019).
-* Atualizado por Giovanni de Castro (24/01/2020).
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version (<https://www.gnu.org/licenses/>).
-****************************************************************************/
+
 
 const int PINO_LED = 6; // Pino 6 conectado ao LED
 const int PINO_SENSOR = A0; // Pino A0 conectado ao sensor de som
@@ -47,3 +31,32 @@ void loop() {
   }
   
 }
+
+//segue o cod do python
+
+
+
+import serial
+import time
+
+# Troque 'COM4' pela porta correta do seu Arduino
+arduino = serial.Serial('COM4', 9600)
+time.sleep(2)  # Aguarda conexão
+
+print("Iniciando monitoramento do sensor de som...")
+
+while True:
+    if arduino.in_waiting > 0:
+        leitura = arduino.readline().decode().strip()
+        try:
+            valor = int(leitura)
+            print(f"Sensor: {valor}")
+
+            if valor >= 550:
+                print("🔴 Som alto! LED ACESO")
+            else:
+                print("🟢 Som normal. LED APAGADO")
+
+        except ValueError:
+            print("Leitura inválida:", leitura)
+
