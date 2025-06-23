@@ -39,7 +39,7 @@ void loop() {
 import serial
 import time
 
-# Troque 'COM4' pela porta correta do seu Arduino
+
 arduino = serial.Serial('COM4', 9600)
 time.sleep(2)  # Aguarda conexão
 
